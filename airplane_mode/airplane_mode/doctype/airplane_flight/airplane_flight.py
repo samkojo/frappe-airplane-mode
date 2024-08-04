@@ -35,6 +35,13 @@ class AirplaneFlight(WebsiteGenerator):
 
     # def before_save(self):
     #     self.title = self.set_title()
+    @frappe.whitelist()
+    def submit_all_airplane_tickets(self):
+        for ticket in frappe.get_all('Airplane Ticket', filters={'flight': self.name}):
+            frappe.db.set_value('Airplane Ticket', ticket.name, 'docstatus', 1)
+            frappe.db.commit()
+
+        frappe.msgprint('All tickets submitted')
 
     def before_submit(self):
         self.status = "Completed"

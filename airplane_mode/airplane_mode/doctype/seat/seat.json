@@ -1,0 +1,38 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-31 19:33:37.250702",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "seat",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "seat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Seat",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Date",
+   "label": "Description"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-07-31 19:34:43.990991",
+ "modified_by": "Administrator",
+ "module": "Airplane Mode",
+ "name": "Seat",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

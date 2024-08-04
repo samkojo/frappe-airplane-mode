@@ -8,7 +8,8 @@
  "field_order": [
   "model",
   "airline",
-  "capacity"
+  "capacity",
+  "seats"
  ],
  "fields": [
   {
@@ -32,11 +33,18 @@
    "fieldtype": "Data",
    "label": "Model",
    "reqd": 1
+  },
+  {
+   "fieldname": "seats",
+   "fieldtype": "Table",
+   "label": "Seats",
+   "options": "Seat",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-27 21:09:41.511333",
+ "modified": "2024-08-03 19:59:31.235892",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane",

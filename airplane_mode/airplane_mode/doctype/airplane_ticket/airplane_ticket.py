@@ -6,12 +6,31 @@ from frappe.model.document import Document
 
 
 class AirplaneTicket(Document):
+    def validate(self):
+        self.check_has_seat_available()
+
+    def check_has_seat_available(self):
+        seats_occupied = frappe.db.count('Airplane Ticket', {'flight': self.flight, 'name': ('!=', self.name)})
+        total_seats = frappe.get_value('Airplane Flight', {'name': self.flight}, 'airplane.capacity')
+        if seats_occupied >= total_seats:
+            frappe.throw('Flight is full')
+
     def before_insert(self):
-        # Generate random integer 2 digits and random letter from A to E
-        import random
-        random_number = random.randint(10, 99)
-        random_letter = chr(random.randint(65, 69))
-        self.seat = f"{random_number}{random_letter}"
+        self.set_seat()
+
+    def set_seat(self):
+        if self.seat:
+            return
+
+        seats_occupied = frappe.get_all('Airplane Ticket', filters={'flight': self.flight}, fields=['seat'])
+        seats_occupied = [seat['seat'] for seat in seats_occupied]
+        airplane = frappe.get_value('Airplane Flight', {'name': self.flight}, 'airplane')
+        seats = frappe.get_doc('Airplane', airplane).seats
+
+        for seat in seats:
+            if seat.seat not in seats_occupied:
+                self.seat = seat.seat
+                break
 
     def before_save(self):
         # Remove duplicate add ons
